@@ -53,10 +53,11 @@ internal class Materiais
 
     public string LerAnotacao(string materia)
     {
-        if (File.Exists(materia))
+        string pathAnot = $@"C:\Projetos\ControleDeMaterial\Anot\{materia}.md";
+        if (File.Exists(pathAnot))
         {
             Materia conteudo = new();
-            string pathAnot = $@"C:\Projetos\ControleDeMaterial\Anot\{materia}.md";
+            
             using (var file = new StreamReader(pathAnot))
             {
                 conteudo.Anotacao = file.ReadToEnd();

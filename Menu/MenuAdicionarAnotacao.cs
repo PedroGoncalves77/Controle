@@ -1,14 +1,20 @@
 ﻿namespace ControleDeMaterial.Menu;
 
-internal class MenuAdicionarAnotacao
+internal class MenuAdicionarAnotacao : Menu
 {
-    public void Iniciar(string path) 
+    public override void Iniciar()
     {
+        Console.Clear();
+        Console.WriteLine("Digite a materia que deseja adicionar a anotação:");
+        var path = Console.ReadLine()!;
         Materiais materiais= new Materiais();
         var p = new Paths(path);
         Materia materia = new Materia();
         materia.Nome = path;
-        materia.Anotacao = materiais.LerAnotacao(p.pathAnotacoes);
+        materia.Anotacao = materiais.LerAnotacao(path);
+        Console.WriteLine(materia.Anotacao);
         materia.AddAnotacao();
+        Salvar.Registrar(path, materia.Anotacao);
+        
     }
 }

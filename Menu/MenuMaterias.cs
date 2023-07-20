@@ -1,8 +1,8 @@
 ﻿namespace ControleDeMaterial.Menu;
 
-internal class MenuMaterias 
+internal class MenuMaterias  : Menu
 {
-    public void Iniciar() 
+    public override void Iniciar() 
     {
         Console.Clear();
         Console.WriteLine("Lista de todas as materias:");

@@ -1,10 +1,8 @@
-﻿using System.Threading.Channels;
+﻿namespace ControleDeMaterial.Menu;
 
-namespace ControleDeMaterial.Menu;
-
-internal class MenuNovoEstudo
+internal class MenuNovoEstudo : Menu
 {
-    public void Iniciar() 
+    public override void Iniciar() 
     {
         Console.Clear();
         Console.WriteLine("1 - Para uma materia ja existente.");
@@ -12,7 +10,9 @@ internal class MenuNovoEstudo
         var escolha = Console.ReadLine();
         switch (escolha) 
         {
-            case "1": 
+            case "1" :
+                Existente();break;
+            case "2" : Novo(new Materia());break;
         }
     }
     public void Existente() 
@@ -62,6 +62,9 @@ internal class MenuNovoEstudo
         else { Console.WriteLine("formato inválido!");
             Finalizar(materia);
         }
+        var path = new Paths(materia.Nome);
+        Salvar.Registrar(path.pathAnotacoes, materia.Anotacao);
+        Salvar.Finalizar(materia);
         
 
     }

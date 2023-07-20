@@ -1,5 +1,14 @@
-﻿registro de uma anotação
-devera ser armazenado aqui.
-o nome do arquivo sera o nome da materia.
-
-
+Nada hehe
+hehehe
+nada again 
+again nadapedro
+edrinn]
+edrao
+Nada hehe
+hehehe
+nada again 
+again nadaUltima vez
+vou banhar
+chau
+agr é vdd
+uiiiiiiiiiiiiiiiiiiiiiiiiiii

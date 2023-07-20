@@ -1,8 +1,8 @@
 ﻿namespace ControleDeMaterial.Menu;
 
-internal class MenuDoDia
+internal class MenuDoDia : Menu
 {
-    public void Iniciar()
+    public override void Iniciar()
     {
         Console.Clear();
         Console.WriteLine("Bem Vindo!");

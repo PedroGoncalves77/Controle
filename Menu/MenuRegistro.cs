@@ -1,8 +1,8 @@
 ﻿namespace ControleDeMaterial.Menu;
 
-internal class MenuRegistro
+internal class MenuRegistro : Menu
 {
-    public void Iniciar() 
+    public override void Iniciar() 
     {
         Console.Clear();
         Console.WriteLine("Lista de registro de materias:");
