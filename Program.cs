@@ -12,6 +12,31 @@ escolha.Add(6, new MenuRegistro());
 
 void ExibirOpcoesDoMenu()
 {
+
+    Materiais materias = new();
+    materias.ListarMateria();
+    var i = materias.MateriaDoDia();
+
+    foreach (var item in i)
+    {
+        Console.WriteLine(item);
+        Console.WriteLine("------------------");
+    }
+    var m = materias.Materias();
+    foreach (var item in m.Keys) 
+    {
+        Console.WriteLine(item);
+    }
+    foreach (var item in m.Values)
+    {
+        foreach (var t in item)
+        {
+            Console.WriteLine(t);
+        }
+    }
+
+    Console.ReadLine();
+
     Console.WriteLine("Bem vindo!");
 Console.WriteLine("1 - Para Adicionar uma anotação.");
 Console.WriteLine("2 - Para obter uma anotação. ");

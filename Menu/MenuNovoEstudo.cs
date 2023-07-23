@@ -23,16 +23,20 @@ internal class MenuNovoEstudo : Menu
         string mat = Console.ReadLine()!;
        foreach (var m in materiais.Materias().Values) 
         {
-            if (m.Contains(mat))
+            foreach (var n in m)
             {
-                var path = new Paths(mat);
-                materia.Nome = mat;
-                materia.Anotacao = materiais.LerAnotacao(path.pathAnotacoes);
-                break;
-
+                if (n.Equals(mat))
+                {
+                    materia.Nome = n;
+                    materia.Anotacao = materiais.LerAnotacao(n);
+                }
             }
-           
+        
         }
+        Console.WriteLine(materia.Nome);
+        Console.WriteLine(materia.Anotacao);
+        Console.ReadKey();
+        Novo(materia);
     }
     public void Novo(Materia materia) 
     {
@@ -56,14 +60,23 @@ internal class MenuNovoEstudo : Menu
         string dias = Console.ReadLine()!;
         if (int.TryParse(dias, out int d))
         {
-            materia.Revisar.ProximaRevisao(d);
-            Console.WriteLine("Agendamento confirmado.");
+            Revisao revisao = new Revisao();
+            revisao.ProximaRevisao(d);
+            materia.Revisar = revisao;
+            Console.WriteLine($"Agendamento confirmado para {materia.Revisar.DiaDeRevisar.ToString("M/d/yyyy")} ");
+            Console.ReadKey();
         }
         else { Console.WriteLine("formato inválido!");
+            Console.ReadKey();
             Finalizar(materia);
         }
-        var path = new Paths(materia.Nome);
-        Salvar.Registrar(path.pathAnotacoes, materia.Anotacao);
+        Console.Clear();
+        if (materia.Nome == null)
+        {
+            Console.WriteLine("Digite o nome da materia:\n");
+            materia.Nome = Console.ReadLine()!;
+        }
+            Salvar.Registrar(materia.Nome, materia.Anotacao);
         Salvar.Finalizar(materia);
         
 

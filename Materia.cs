@@ -1,7 +1,13 @@
 ﻿namespace ControleDeMaterial;
 
 internal class Materia
+    
 {
+    public Materia()
+    {
+        
+    }
+
     public string  Nome { get; set; }
     public string  Anotacao { get; set; }
     public Revisao Revisar  { get; set; }

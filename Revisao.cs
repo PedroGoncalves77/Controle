@@ -1,15 +1,10 @@
-﻿using System.Diagnostics.Tracing;
+﻿namespace ControleDeMaterial;
 
-namespace ControleDeMaterial;
-
-internal class Revisao
+public class Revisao
 {
-    public Revisao()
-    {
-        Dia = DateTime.Now;
-    }
-    public DateTime DiaDeRevisar { get; set; }
-    private DateTime Dia { get; set; }
+
+    public DateTime DiaDeRevisar;
+    private DateTime Dia = DateTime.Now;
     public Boolean IsDay { get
         {
             if (Dia == DiaDeRevisar) { return true; }
@@ -17,11 +12,11 @@ internal class Revisao
             { return false; }
         }
         }
-    public DateTime ProximaRevisao(int dias) 
-    {
-        DiaDeRevisar = Dia.AddDays(dias);
-        return DiaDeRevisar;
-    }
+    public void ProximaRevisao(int dias)  => DiaDeRevisar = Dia.AddDays(dias);
+
+
+
+
 
 }
 

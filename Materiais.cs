@@ -1,20 +1,24 @@
-﻿using System.Net.Http.Headers;
-
-namespace ControleDeMaterial;
+﻿namespace ControleDeMaterial;
 
 internal class Materiais
 {
+    public Materiais()
+    {
+        ListarMateria();
+    }
     Dictionary<string, List<string>> Listado = new();
     List<string> lista = new();
-    public Dictionary<string, List<string>> Materias() => Listado;
+
+    public Dictionary<string, List<string>> Materias() { return Listado; }
     public List<string> Registro() => lista;
     public void ListarMateria() 
     {
-        if (File.Exists(Paths.pathRevisao))
+        string revisao = @"C:\Projetos\ControleDeMaterial\Revisao.txt";
+        if (File.Exists(revisao))
         {
             Console.Clear();
 
-            Stream stream = File.Open(Paths.pathRevisao, FileMode.Open);
+            Stream stream = File.Open(revisao, FileMode.Open);
             StreamReader leitor = new StreamReader(stream);
             string linha = leitor.ReadLineAsync().GetAwaiter().GetResult()!;
             while (linha != null)
@@ -31,18 +35,23 @@ internal class Materiais
             {
                 if (i != null)
                 {
-                    data = i.Substring(0, 10);
-                    materia = i.Substring(11);
+                    data = i.Substring(0, 10).Trim();
+                    materia = i.Substring(11).Trim();
                     listado.Add(materia);
-                    if (Listado.ContainsKey(data))
-                    {
-                        Listado[data].Add(materia);
-                    }
-                    else
+                    if (Listado.ContainsKey(data) == false)
                     {
                         Listado.Add(data, new List<string>());
                         Listado[data].Add(materia);
                     }
+                    if (Listado.ContainsKey(data))
+                    {
+                       if (!(Listado[data].Contains(materia))) 
+                        {
+                            Listado[data].Add(materia);
+                        }
+                        else { };
+                    }
+                    
                 }
             }         
             stream.Close();
@@ -68,12 +77,14 @@ internal class Materiais
     }
     public List<string> MateriaDoDia() 
     {
-        string d = DateTime.Now.ToString("dd/mm/yyy");
+        var list = new List<string>();
+        string d = DateTime.Now.ToString("M/d/yyyy");
         if (Listado.ContainsKey(d)) 
         {
-            return Listado[d];
+            list = Listado[d];
+            return list;
         }
-        else { return null!; }
+        else { return list; }
     }
    
 }
