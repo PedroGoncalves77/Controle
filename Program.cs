@@ -14,7 +14,7 @@ void ExibirOpcoesDoMenu()
 {
 
     Materiais materias = new();
-    materias.ListarMateria();
+    materias.Listando();
     var i = materias.MateriaDoDia();
 
     foreach (var item in i)

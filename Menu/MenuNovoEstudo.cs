@@ -28,7 +28,7 @@ internal class MenuNovoEstudo : Menu
                 if (n.Equals(mat))
                 {
                     materia.Nome = n;
-                    materia.Anotacao = materiais.LerAnotacao(n);
+                    materia.Anotacao = materiais.LerAnotacao(n).ToString()!;
                 }
             }
         

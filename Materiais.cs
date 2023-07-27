@@ -4,74 +4,57 @@ internal class Materiais
 {
     public Materiais()
     {
-        ListarMateria();
+       ListarMateria();
     }
     Dictionary<string, List<string>> Listado = new();
     List<string> lista = new();
 
-    public Dictionary<string, List<string>> Materias() { return Listado; }
+    public Dictionary<string, List<string>> Materias() => Listado;
     public List<string> Registro() => lista;
-    public void ListarMateria() 
+    
+    public async void ListarMateria()
     {
+        string linha = " ";
         string revisao = @"C:\Projetos\ControleDeMaterial\Revisao.txt";
-        if (File.Exists(revisao))
-        {
             Console.Clear();
-
-            Stream stream = File.Open(revisao, FileMode.Open);
-            StreamReader leitor = new StreamReader(stream);
-            string linha = leitor.ReadLineAsync().GetAwaiter().GetResult()!;
-            while (linha != null)
-            {
-                linha = leitor.ReadLineAsync().GetAwaiter().GetResult()!;
-                lista.Add(linha);
-            }
-            
-            List<string> listado = new();
-            string data = String.Empty;
-            string materia = string.Empty;
-
-            foreach (var i in lista)
-            {
-                if (i != null)
-                {
-                    data = i.Substring(0, 10).Trim();
-                    materia = i.Substring(11).Trim();
-                    listado.Add(materia);
-                    if (Listado.ContainsKey(data) == false)
-                    {
-                        Listado.Add(data, new List<string>());
-                        Listado[data].Add(materia);
-                    }
-                    if (Listado.ContainsKey(data))
-                    {
-                       if (!(Listado[data].Contains(materia))) 
-                        {
-                            Listado[data].Add(materia);
-                        }
-                        else { };
-                    }
-                    
-                }
-            }         
-            stream.Close();
-            leitor.Close();
-        }
+        var leitura = await File.ReadAllLinesAsync(revisao);
+        lista = leitura.ToList();
+        
         
     }
+    public void Listando() 
+    {
+       List<string> listado = new();
+            string data = string.Empty;
+            string materia = string.Empty;
+        foreach (var i in lista)
+        {
+          if (i != null)
+          {
+             data = i.Substring(0, 10).Trim();
+             materia = i.Substring(11).Trim();
+             listado.Add(materia);
+             if (! (Listado.ContainsKey(data)))
+             {
+             Listado.Add(data, new List<string>());
+             Listado[data].Add(materia);
+             }
+             if (Listado.ContainsKey(data) && (!(Listado[data].Contains(materia))))
+             {
+              Listado[data].Add(materia);             
+             }
 
+          }
+        }  
+    }
     public string LerAnotacao(string materia)
     {
+        Materia conteudo = new();
         string pathAnot = $@"C:\Projetos\ControleDeMaterial\Anot\{materia}.md";
         if (File.Exists(pathAnot))
         {
-            Materia conteudo = new();
-            
-            using (var file = new StreamReader(pathAnot))
-            {
-                conteudo.Anotacao = file.ReadToEnd();
-            }
-            return conteudo.Anotacao;
+           var anot = File.ReadAllText(pathAnot);
+            return anot;
         }
         else { return "Materia não encontrada"; }
     }

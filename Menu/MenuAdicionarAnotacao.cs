@@ -11,7 +11,7 @@ internal class MenuAdicionarAnotacao : Menu
         var p = new Paths(path);
         Materia materia = new Materia();
         materia.Nome = path;
-        materia.Anotacao = materiais.LerAnotacao(path);
+        materia.Anotacao = materiais.LerAnotacao(path).ToString()!;
         Console.WriteLine(materia.Anotacao);
         materia.AddAnotacao();
         Salvar.Registrar(path, materia.Anotacao);
