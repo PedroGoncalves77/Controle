@@ -4,7 +4,7 @@ internal class Materiais
 {
     public Materiais()
     {
-       ListarMateria();
+        ListarMateria();
     }
     Dictionary<string, List<string>> Listado = new();
     List<string> lista = new();
@@ -12,28 +12,33 @@ internal class Materiais
     public Dictionary<string, List<string>> Materias() => Listado;
     public List<string> Registro() => lista;
     
-    public async void ListarMateria()
+    public void ListarMateria()
     {
-        string linha = " ";
-        string revisao = @"C:\Projetos\ControleDeMaterial\Revisao.txt";
+        try
+        {
+            string linha = " ";
+            string revisao = @"C:\Projetos\ControleDeMaterial\Revisao.txt";
             Console.Clear();
-        var leitura = await File.ReadAllLinesAsync(revisao);
-        lista = leitura.ToList();
-        
-        
+            var leitura = File.ReadAllLines(revisao);
+            lista = leitura.ToList();
+            Listando();
+        }
+        catch(Exception ex) 
+        {   
+
+            Console.WriteLine(ex.Message);
+        }
     }
     public void Listando() 
     {
-       List<string> listado = new();
             string data = string.Empty;
             string materia = string.Empty;
         foreach (var i in lista)
         {
-          if (i != null)
+          if (!(string.IsNullOrEmpty(i)))
           {
              data = i.Substring(0, 10).Trim();
              materia = i.Substring(11).Trim();
-             listado.Add(materia);
              if (! (Listado.ContainsKey(data)))
              {
              Listado.Add(data, new List<string>());
@@ -49,25 +54,41 @@ internal class Materiais
     }
     public string LerAnotacao(string materia)
     {
-        Materia conteudo = new();
-        string pathAnot = $@"C:\Projetos\ControleDeMaterial\Anot\{materia}.md";
-        if (File.Exists(pathAnot))
+        try
         {
-           var anot = File.ReadAllText(pathAnot);
-            return anot;
+            Materia conteudo = new();
+            string pathAnot = $@"C:\Projetos\ControleDeMaterial\Anot\{materia}.md";
+            if (File.Exists(pathAnot))
+            {
+                var anot = File.ReadAllText(pathAnot);
+                return anot;
+            }
+            else { return String.Empty; }
         }
-        else { return "Materia não encontrada"; }
+        catch(Exception ex) 
+        {
+            Console.WriteLine(ex.Message);
+            return String.Empty;
+        }
     }
     public List<string> MateriaDoDia() 
     {
         var list = new List<string>();
-        string d = DateTime.Now.ToString("M/d/yyyy");
-        if (Listado.ContainsKey(d)) 
+        try
         {
-            list = Listado[d];
+            string d = DateTime.Now.ToString("M/d/yyyy");
+            if (Listado.ContainsKey(d))
+            {
+                list = Listado[d];
+                return list;
+            }
+            else { return list; }
+        }
+        catch(Exception ex) 
+        {
+            Console.WriteLine(ex.Message);
             return list;
         }
-        else { return list; }
     }
    
 }

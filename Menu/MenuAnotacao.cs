@@ -8,7 +8,6 @@ internal class MenuAnotacao : Menu
         Materiais materiais = new();
         Console.WriteLine("Digite o nome da materia que deseja obter a anotação:");
         string p = Console.ReadLine()!;  
-        var path = new Paths(p);
         Console.WriteLine(materiais.LerAnotacao(p));
         Console.ReadLine();
 
