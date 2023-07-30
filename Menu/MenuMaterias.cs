@@ -7,11 +7,13 @@ internal class MenuMaterias  : Menu
         Console.Clear();
         Console.WriteLine("Lista de todas as materias:");
         Materiais materiais = new();
-        foreach(var m in materiais.Materias()) 
+        var materias = materiais.Materias().Values;
+        foreach(var m in materias) 
         {
-            foreach (var v in m.Value) 
+            foreach (var v in m.Distinct()) 
             {
                 Console.WriteLine(v);
+                Console.WriteLine("----------------");
             }
         }
         Console.ReadKey();

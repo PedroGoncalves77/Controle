@@ -6,15 +6,21 @@ internal class MenuAdicionarAnotacao : Menu
     {
         Console.Clear();
         Console.WriteLine("Digite a materia que deseja adicionar a anotação:");
-        var path = Console.ReadLine()!;
+        var nome = Console.ReadLine()!;
         Materiais materiais= new Materiais();
-        var p = new Paths(path);
         Materia materia = new Materia();
-        materia.Nome = path;
-        materia.Anotacao = materiais.LerAnotacao(path).ToString()!;
-        Console.WriteLine(materia.Anotacao);
-        materia.AddAnotacao();
-        Salvar.Registrar(path, materia.Anotacao);
-        
+        materia.Nome = nome;
+        materia.Anotacao = materiais.LerAnotacao(nome);
+        if (materia.Anotacao.Equals(string.Empty))
+        {
+            Console.WriteLine("Materia não encontrada!");
+            Console.ReadKey();
+        }
+        else
+        {
+            materia.AddAnotacao();
+            materia.Registrar();
+        }
+
     }
 }
