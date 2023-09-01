@@ -52,8 +52,24 @@ internal class MenuDoDia : Menu
         }
         var retorno = datas.MinBy(x => x);
         var dias = retorno - DateTime.Now.Date;
-        Console.WriteLine("Numero de dias até a proxima revisão:");
-        Console.WriteLine(dias.Days);
-        Console.ReadLine();
+        if (dias.Days > 0) 
+        { Console.WriteLine("Numero de dias até a proxima revisão:");
+            Console.WriteLine(dias.Days);
+            Console.ReadLine();
+        }
+        else {
+            Console.WriteLine("Materias em pendencia:");
+            foreach (var d in datas) 
+            {   
+                if (d.Date < DateTime.Now.Date)
+                {
+                    Console.WriteLine(d.ToString("d"));
+                    foreach (var da in dados[d.ToString("d")]) 
+                    { Console.WriteLine(da); }
+                    Console.WriteLine("----------");
+                }
+            }
+            Console.ReadKey();
+        }
     } 
 }

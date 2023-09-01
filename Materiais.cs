@@ -5,6 +5,7 @@ internal class Materiais
     public Materiais()
     {
         ListarMateria();
+       
     }
     Dictionary<string, List<string>> Listado = new();
     List<string> lista = new();

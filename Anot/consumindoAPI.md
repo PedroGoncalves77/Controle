@@ -31,17 +31,14 @@ Erros do servidor (500-599)
 
 internal class Musica
 {
-[JsonPropertyName("Song")]
-public string? Nome {get; set;}
-
-[JsonPropetyName("duration_ms")]
-public int Duracao{get; set;}
-
+[JsonPropertyName("song")]
+public string? Nome{get; set;}
+[JsonPropertyName("artists")]
+public string? Artista {get; set;}
 [JsonPropertyName("genre")]
 public string? Genero{get; set;}
-
-[JsonPropertyName("artist")]
-public string? Artista {get; set;}
+[Json PropertyName("duration_ms")]
+public string? Duracao{get; set;}
 
 public string? years {get; set;}
 public int Ano{get
@@ -64,10 +61,9 @@ else{ return 0;}
 
 }
 # Program.cs 
-{
-    var saida = await GetStringAsync("Url");
-    var musicas = JsonSerializer.Deserialize<List<Musica>>(saida);
-    musicas.Exibir();
+{   var saida = client.GetStringAsync("URL");
+    var musicas = JsonSerialize.Decerializer<List<Musica>>(saida);
+
     //Exibe as propriedades.
 }
 ### Desafio 
@@ -106,33 +102,81 @@ else{ return 0;}
 
 # LinqFilter.cs
 { 
-public static void FiltrarTodosGeneros(List<Musica> musicas){
+public static void FiltrarTodosGeneros(List<Musica> musicas)
+{
 var generos = musicas.Select(x => x.Genero).Distinct().ToList();
-...
+}...
 }
 # LinqOrder.cs
 {
 public static void OrdenarListaDeArtista(List<Musica> musicas){
-var artistas = musicas.OrderBy( x => x.Artista).Select(x => x.Artista).Distinct.ToList();
+var artistas = musicas.OrderBy(x => x.Artista).Select(x => x.Artista).Distinct().ToList();
 }
 # LinqFilter.cs
 {
-public static void FiltrarArtistaPorGenero(List<Musica> musicas, string artista){
-var artistas = musicas.Where( x => x.Artista.Contains(artista)).Select( x => x.Genero).Distinct().ToList();}
+public static void FiltrarArtistaPorGenero(List<Musica> musicas, string genero){
+var artistas = musicas.Where( x => x.Genero.Contains(genero)).Select(x => x.Artista).ToList();
+}
 }
 # LinqFilter.cs
 {
 public static void FiltrarMusicasDeArtista(List<Musica> musicas, string artista){
-var musicas = musicas.Where(x => x.Artista.Equals(artista)).Select( x => x.Nome).ToList();}
+var musicasArtista = musicas.Where(x => x.Artista.Equals(artista).Select( x => x.Nome).ToList();
+}
 }
 # LinqFilter.cs
 {
 public static void FiltrarMusicaPeloAno(List<Musica> musicas, int ano){
-var musicas = musicas.Where(x => x.Ano == ano).Select( x => x.Nome).ToList();
+var musicasAno = musicas.Where(x => x.Ano == ano).Select(x => x.Nome).ToList();
 var musicas = musicas.Where(x => x.Ano.Equals(ano).Select(x => x.Nome).ToList(); // No caso de (string) ano.
 }
 
 ----------------------------
 Revisao 7 dias
 ---------------------------
+# MusicasFavoritas.cs
+{
+public string Nome {get; set;}
+public List<Musica> MusicasFavoritas{get;}
+
+public MusicasFavoritas(string nome)
+{
+Nome = nome;
+MusicasFavoritas = new List<Muisca>();
+}
+public void AdicionarMusica(Musica musica) => MusicasFavoritas.Add(musica);
+
+public void GerarArquivoJson()
+{
+var json = JsonSerializer.Serialize(new{nome = Nome, musica = MusicasFavoritas});
+File.WriteAllText($@"C:\Projetos\{Nome}.json",json);
+}
+public void GerarArquivoTxt()
+string path = @"C:\Projetos";
+{
+using (StreamWrite write = new (path)
+{
+write.WriteLine(Nome);
+foreach (var m in MusicasFavoritas)
+{
+write.WriteLine(m);
+}
+}
+# Musica.cs
+{
+string[] tonalidade = {"C", "C#", "D", "D#", "E","F", "F#", "G","G#", "A" ,"A#", "B"};
+public int key {get; set;}
+public string Tonalidades {get {return tonalidade[key];}}
+}
+# LinqFilter.cs
+{
+public static void ExibirMusicasCSharp(Musica musicas)
+{
+var musicaCSharp = musicas.Where(x => x.Tonalidade.Equals("C#")).Select(x => x.Nome).ToList();
+}
+
+using (Httpclient client = new HttpClient)
+{
+ var saida = client.GetStringAsync("URL");
+}
 

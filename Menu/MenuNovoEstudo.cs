@@ -76,7 +76,7 @@ internal class MenuNovoEstudo : Menu
             revisao.ProximaRevisao(d);
             materia.Revisar = revisao;
             Console.Clear();
-            Console.WriteLine($"Agendamento confirmado para {materia.Revisar.DiaDeRevisar.ToString("M/d/yyyy")} ");
+            Console.WriteLine($"Agendamento confirmado para {materia.Revisar.DiaDeRevisar.ToString("d")} ");
             Console.ReadKey();
         }
         else {
