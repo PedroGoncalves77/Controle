@@ -26,6 +26,10 @@ internal class MenuNovoEstudo : Menu
         }
         Console.WriteLine("Digite o nome da materia:");
         string mat = Console.ReadLine()!;
+        if (mat.Length == 0) 
+        {
+            Iniciar();
+        }
        foreach (var m in materiais.Materias().Values) 
         {
             foreach (var n in m)

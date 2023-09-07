@@ -23,7 +23,7 @@ internal class Salvar
                 conteudo[d.ToString("d")].Remove(materia.Nome);
             }
         }
-        var path = $@"..\..\..\Revisao.txt";
+        var path = @"C:\Projetos\ControleDeMaterial\Revisao.txt"; 
         using (StreamWriter writer = new StreamWriter(path)) 
         {
             foreach (var c in conteudo.Keys)
