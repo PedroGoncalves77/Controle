@@ -23,7 +23,7 @@ internal class Salvar
                 conteudo[d.ToString("d")].Remove(materia.Nome);
             }
         }
-        var path = @"C:\Projetos\ControleDeMaterial\Revisao.txt"; 
+        var path = @"C:\Projetos\ControleDeMaterial\Revisao.md"; 
         using (StreamWriter writer = new StreamWriter(path)) 
         {
             foreach (var c in conteudo.Keys)
@@ -40,7 +40,7 @@ internal class Salvar
     public static async void Finalizar(Materia materia)
     {
        Limpar(materia);
-       string pathRevisao = @"C:\Projetos\ControleDeMaterial\Revisao.txt";
+       string pathRevisao = @"C:\Projetos\ControleDeMaterial\Revisao.md";
        string spc = "   ";
        string id = $"{materia.Revisar.DiaDeRevisar.ToString("d")}{spc}{materia.Nome} \n";
        await File.AppendAllTextAsync(pathRevisao, id);

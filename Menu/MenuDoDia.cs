@@ -21,13 +21,13 @@ internal class MenuDoDia : Menu
             {
              Console.WriteLine(m);
              Console.WriteLine("-----------");
-             Go();
+             Go(m);
             }
 
             }
         }
     }
-        public void Go()
+        public void Go(string materia)
         {
             Console.WriteLine("\n1 - INICIAR.");
             var escolha = Console.ReadLine();
@@ -36,7 +36,7 @@ internal class MenuDoDia : Menu
             switch (n)
             {
               case 1: MenuNovoEstudo menuNovoEstudo = new();
-                        menuNovoEstudo.Existente(); break;
+                        menuNovoEstudo.Existente(materia); break;
             }
             } 
         }

@@ -3,7 +3,6 @@ C:\Projetos\ControleDeMaterial\bin\Debug\net6.0\ControleDeMaterial.deps.json
 C:\Projetos\ControleDeMaterial\bin\Debug\net6.0\ControleDeMaterial.runtimeconfig.json
 C:\Projetos\ControleDeMaterial\bin\Debug\net6.0\ControleDeMaterial.dll
 C:\Projetos\ControleDeMaterial\bin\Debug\net6.0\ControleDeMaterial.pdb
-C:\Projetos\ControleDeMaterial\obj\Debug\net6.0\ControleDeMaterial.csproj.AssemblyReference.cache
 C:\Projetos\ControleDeMaterial\obj\Debug\net6.0\ControleDeMaterial.GeneratedMSBuildEditorConfig.editorconfig
 C:\Projetos\ControleDeMaterial\obj\Debug\net6.0\ControleDeMaterial.AssemblyInfoInputs.cache
 C:\Projetos\ControleDeMaterial\obj\Debug\net6.0\ControleDeMaterial.AssemblyInfo.cs
@@ -13,3 +12,4 @@ C:\Projetos\ControleDeMaterial\obj\Debug\net6.0\refint\ControleDeMaterial.dll
 C:\Projetos\ControleDeMaterial\obj\Debug\net6.0\ControleDeMaterial.pdb
 C:\Projetos\ControleDeMaterial\obj\Debug\net6.0\ControleDeMaterial.genruntimeconfig.cache
 C:\Projetos\ControleDeMaterial\obj\Debug\net6.0\ref\ControleDeMaterial.dll
+C:\Projetos\ControleDeMaterial\obj\Debug\net6.0\ControleDeMaterial.sourcelink.json

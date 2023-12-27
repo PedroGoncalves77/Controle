@@ -18,7 +18,7 @@ internal class Materiais
         try
         {
             string linha = " ";
-            string revisao = @"C:\Projetos\ControleDeMaterial\Revisao.txt";
+            string revisao = @"C:\Projetos\ControleDeMaterial\Revisao.md";
             Console.Clear();
             var leitura = File.ReadAllLines(revisao);
             lista = leitura.ToList();

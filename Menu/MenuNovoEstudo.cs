@@ -5,17 +5,23 @@ internal class MenuNovoEstudo : Menu
     public override void Iniciar() 
     {
         Console.Clear();
-        Console.WriteLine("1 - Para uma materia existente.");
-        Console.WriteLine("2 - Para nova anotação.");
+        Console.WriteLine("1 - Revisão.");
+        Console.WriteLine("2 - Nova anotação.");
         var escolha = Console.ReadLine();
         switch (escolha) 
         {
-            case "1" :
-                Existente();break;
+            case "1":
+                Console.Clear();
+                Console.WriteLine("Digite o nome da materia:");
+                var materia = Console.ReadLine();
+                Existente(materia);break;
             case "2" : Novo(new Materia());break;
+            default: Console.Clear(); break;
+		        
+                
         }
     }
-    public void Existente() 
+    public void Existente(string mat) 
     {   Console.Clear();
         Materia materia = new();
         Materiais materiais = new();
@@ -24,15 +30,13 @@ internal class MenuNovoEstudo : Menu
             Console.WriteLine(m);
             Console.WriteLine("--------------");
         }
-        Console.WriteLine("Digite o nome da materia:");
-        string mat = Console.ReadLine()!;
         if (mat.Length == 0) 
         {
             Iniciar();
         }
        foreach (var m in materiais.Materias().Values) 
         {
-            foreach (var n in m)
+            foreach (string n in m)
             {
                 if (n.Equals(mat))
                 {
@@ -43,16 +47,19 @@ internal class MenuNovoEstudo : Menu
             }
         
         }
-       if (materia.Nome == String.Empty) 
+        if(materia.Nome == String.Empty || materia.Nome == null)
         {
             Console.WriteLine("Materia não encontrada");
             Console.ReadKey();
             Iniciar();
         }
-        Console.WriteLine(materia.Nome);
-        Console.WriteLine(materia.Anotacao);
-        Console.ReadKey();
-        Novo(materia);
+        else
+        {
+            Console.WriteLine(materia.Nome);
+            Console.WriteLine(materia.Anotacao);
+            Console.ReadKey();
+            Novo(materia);
+        }
     }
     public void Novo(Materia materia) 
     {
@@ -72,28 +79,39 @@ internal class MenuNovoEstudo : Menu
     } 
     public void Finalizar(Materia materia) 
         {
-        Console.WriteLine("Digite o numero de dias até a proxima revisão:");
-        string dias = Console.ReadLine()!;
-        if (int.TryParse(dias, out int d))
-        {
-            Revisao revisao = new Revisao();
-            revisao.ProximaRevisao(d);
-            materia.Revisar = revisao;
-            Console.Clear();
-            Console.WriteLine($"Agendamento confirmado para {materia.Revisar.DiaDeRevisar.ToString("d")} ");
-            Console.ReadKey();
-        }
-        else {
-            Console.Clear();
-            Console.WriteLine("formato inválido!");
-            Console.ReadKey();
-            Finalizar(materia);
-        }
+        Revisao revisao = new Revisao();
+        
+       
+            Console.WriteLine("Digite o numero de dias até a proxima revisão:");
+            string dias = Console.ReadLine()!;
+            if (int.TryParse(dias, out int d))
+            {
+               
+                revisao.ProximaRevisao(d);
+                materia.Revisar = revisao;
+                Console.Clear();
+                Console.WriteLine($"Agendamento confirmado para {materia.Revisar.DiaDeRevisar.ToString("d")} ");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("formato inválido!");
+                Console.ReadKey();
+                Finalizar(materia);
+            }
         Console.Clear();
-        if (materia.Nome == String.Empty)
-        {
-            Console.WriteLine("Digite o nome da materia:\n");
-            materia.Nomear(Console.ReadLine()!);
+        if (materia.Nome == String.Empty) 
+        { 
+            string nome = string.Empty;
+            do {
+                Console.WriteLine("Digite o nome da materia:\n"); 
+                nome = Console.ReadLine()!;
+            }
+            while (nome == null || nome.Equals(string.Empty));
+           
+            materia.Nomear(nome);
+            
         }
         Salvar.Finalizar(materia);
         

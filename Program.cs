@@ -38,7 +38,6 @@ void ExibirOpcoesDoMenu()
         }
         else
         {
-            Console.WriteLine("Opção inválida");
             ExibirOpcoesDoMenu();
         }
     }
