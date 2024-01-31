@@ -5,8 +5,8 @@ $nome = "$n.md"
 copy $path "$pathDir\$nome"
 dir -File $pathDir | 
 ? Name -Like "*.md~"| 
-rm  2>&1 > $null
-Clear-Content $path 2>&1 > $null
+rm  2>&1 >> error.log
+Clear-Content $path 2>&1 >> error.log
 
 
 
